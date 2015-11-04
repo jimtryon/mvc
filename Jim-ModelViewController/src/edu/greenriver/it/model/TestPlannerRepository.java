@@ -1,6 +1,8 @@
 package edu.greenriver.it.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import edu.greenriver.it.entities.Contact;
@@ -8,12 +10,18 @@ import edu.greenriver.it.entities.Email;
 
 public class TestPlannerRepository implements IPlannerRepository
 {
+	private ArrayList<Contact> listOfContacts = new ArrayList<>();
+	
+	public TestPlannerRepository()
+	{
+		listOfContacts.add(new Contact("Sarah", "Smith", "100 North Road", "512-380-5600"));
+		listOfContacts.add(new Contact("Dan", "Meister", "5000 Daffodil Lane", "426-832-1777"));	
+	}
 
 	@Override
 	public List<Contact> getContacts()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return Collections.unmodifiableList(listOfContacts);
 	}
 
 	@Override
@@ -26,15 +34,30 @@ public class TestPlannerRepository implements IPlannerRepository
 	@Override
 	public boolean contactExists(String firstNameOfContact, String lastNameOfContact)
 	{
-		// TODO Auto-generated method stub
+		for (Contact contact : listOfContacts) 
+		{
+			if (contact.equals(firstNameOfContact)
+				&& contact.equals(lastNameOfContact)) 
+			{
+				return true;
+			}
+		}
 		return false;
 	}
 
 	@Override
+	// 
 	public Contact getContactByName(String firstNameOfContact, String lastNameOfContact)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		for (Contact contact : listOfContacts) 
+		{
+			if (contact.equals(firstNameOfContact)
+				&& contact.equals(lastNameOfContact)) 
+			{
+				return contact;
+			}
+		}
+		throw new IllegalArgumentException("Contact is not found");
 	}
 
 	@Override
