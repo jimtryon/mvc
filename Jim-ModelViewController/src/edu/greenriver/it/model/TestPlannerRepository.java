@@ -11,11 +11,18 @@ import edu.greenriver.it.entities.Email;
 public class TestPlannerRepository implements IPlannerRepository
 {
 	private ArrayList<Contact> listOfContacts = new ArrayList<>();
+	private ArrayList<Email> listofEmails = new ArrayList<>();
 	
 	public TestPlannerRepository()
 	{
 		listOfContacts.add(new Contact("Sarah", "Smith", "100 North Road", "512-380-5600"));
-		listOfContacts.add(new Contact("Dan", "Meister", "5000 Daffodil Lane", "426-832-1777"));	
+		listOfContacts.add(new Contact("Dan", "Meister", "5000 Daffodil Lane", "426-832-1777"));
+		
+		listofEmails.add(new Email(LocalDateTime.now().minusDays(7), 
+				"Want to go see a movie?", "There is this great movie coming"
+						+ "out next Friday.  We should go see it!"));
+		listofEmails.add(new Email(LocalDateTime.now().minusDays(20), 
+				"How are you?", "When you have some free time off work, let's get lunch."));
 	}
 
 	@Override
@@ -27,8 +34,7 @@ public class TestPlannerRepository implements IPlannerRepository
 	@Override
 	public List<Email> getEmails()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return Collections.unmodifiableList(listofEmails);
 	}
 
 	@Override
@@ -63,7 +69,6 @@ public class TestPlannerRepository implements IPlannerRepository
 	@Override
 	public List<Email> getRecentEmails(LocalDateTime emailAfterThisDate)
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
