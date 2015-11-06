@@ -1,6 +1,8 @@
 package edu.greenriver.it.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -66,17 +68,25 @@ public class TestPlannerRepository implements IPlannerRepository
 		throw new IllegalArgumentException("Contact is not found");
 	}
 
+	// retrieve a list of emails within the past 30 days 
 	@Override
 	public List<Email> getRecentEmails(LocalDateTime emailAfterThisDate)
 	{
+		
 		return null;
+		
 	}
 
+	// check if the string we are looking for is in the email
+	//"hello"
 	@Override
 	public List<Email> getMatchingEmails(String emailStringToSearch)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		List<Email> listofEmails = new List<Email>();
+		
+		for (Email email : listofEmails)
+		
+		return listofEmails;
 	}
 
 }
