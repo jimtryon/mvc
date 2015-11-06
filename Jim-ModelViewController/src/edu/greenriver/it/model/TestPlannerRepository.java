@@ -1,8 +1,6 @@
 package edu.greenriver.it.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,17 +11,17 @@ import edu.greenriver.it.entities.Email;
 public class TestPlannerRepository implements IPlannerRepository
 {
 	private ArrayList<Contact> listOfContacts = new ArrayList<>();
-	private ArrayList<Email> listofEmails = new ArrayList<>();
+	private ArrayList<Email> listOfEmails = new ArrayList<>();
 	
 	public TestPlannerRepository()
 	{
 		listOfContacts.add(new Contact("Sarah", "Smith", "100 North Road", "512-380-5600"));
 		listOfContacts.add(new Contact("Dan", "Meister", "5000 Daffodil Lane", "426-832-1777"));
 		
-		listofEmails.add(new Email(LocalDateTime.now().minusDays(7), 
+		listOfEmails.add(new Email(LocalDateTime.now().minusDays(7), 
 				"Want to go see a movie?", "There is this great movie coming"
 						+ "out next Friday.  We should go see it!"));
-		listofEmails.add(new Email(LocalDateTime.now().minusDays(20), 
+		listOfEmails.add(new Email(LocalDateTime.now().minusDays(20), 
 				"How are you?", "When you have some free time off work, let's get lunch."));
 	}
 
@@ -36,7 +34,7 @@ public class TestPlannerRepository implements IPlannerRepository
 	@Override
 	public List<Email> getEmails()
 	{
-		return Collections.unmodifiableList(listofEmails);
+		return Collections.unmodifiableList(listOfEmails);
 	}
 
 	@Override
@@ -72,8 +70,18 @@ public class TestPlannerRepository implements IPlannerRepository
 	@Override
 	public List<Email> getRecentEmails(LocalDateTime emailAfterThisDate)
 	{
+		emailAfterThisDate = LocalDateTime.now().minusMonths(1);
 		
-		return null;
+		List<Email> localListOfEmails = new ArrayList<>();
+ 	
+		for (Email email: listOfEmails)
+		{
+			if (email.getTimeReceived().isAfter(emailAfterThisDate))
+			{
+				localListOfEmails.add(email);
+			}
+		}
+		return localListOfEmails;
 		
 	}
 
@@ -82,11 +90,17 @@ public class TestPlannerRepository implements IPlannerRepository
 	@Override
 	public List<Email> getMatchingEmails(String emailStringToSearch)
 	{
-		List<Email> listofEmails = new List<Email>();
+		List<Email> localListOfEmails = new ArrayList<>();
 		
-		for (Email email : listofEmails)
-		
-		return listofEmails;
+		for (Email email : listOfEmails)
+		{
+			if (email.getBody().contains(emailStringToSearch) || 
+					email.getSubject().contains(emailStringToSearch))
+			{
+				localListOfEmails.add(email);
+			}
+		}
+		return localListOfEmails;
 	}
 
 }
