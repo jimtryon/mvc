@@ -6,6 +6,12 @@ import java.util.List;
 import edu.greenriver.it.entities.Contact;
 import edu.greenriver.it.entities.Email;
 
+/**
+ * IPlannerRepository interface that contains all of the abstract methods
+ * for contacts and emails 
+ * @author jtryon
+ *
+ */
 public interface IPlannerRepository
 {
 	public List<Contact> getContacts();

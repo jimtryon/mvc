@@ -8,6 +8,13 @@ import java.util.List;
 import edu.greenriver.it.entities.Contact;
 import edu.greenriver.it.entities.Email;
 
+/**
+ * TestPlannerRepository class that creates a list of contacts and emails 
+ * and contains methods to display, fetch, and search within the lists
+ *  
+ * @author jtryon
+ *
+ */
 public class TestPlannerRepository implements IPlannerRepository
 {
 	private ArrayList<Contact> listOfContacts = new ArrayList<>();
@@ -25,25 +32,34 @@ public class TestPlannerRepository implements IPlannerRepository
 				"How are you?", "When you have some free time off work, let's get lunch."));
 	}
 
+	/**
+	 * Method that returns all of the contacts
+	 */
 	@Override
 	public List<Contact> getContacts()
 	{
 		return Collections.unmodifiableList(listOfContacts);
 	}
 
+	/** 
+	 * Method that returns all of the emails
+	 */
 	@Override
 	public List<Email> getEmails()
 	{
 		return Collections.unmodifiableList(listOfEmails);
 	}
 
+	/** 
+	 * Method that returns true if a contact exists with the specified first and last name
+	 */
 	@Override
 	public boolean contactExists(String firstNameOfContact, String lastNameOfContact)
 	{
 		for (Contact contact : listOfContacts) 
 		{
-			if (contact.equals(firstNameOfContact)
-				&& contact.equals(lastNameOfContact)) 
+			if (contact.getFirstName().equals(firstNameOfContact)
+				&& contact.getLastName().equals(lastNameOfContact)) 
 			{
 				return true;
 			}
@@ -51,14 +67,16 @@ public class TestPlannerRepository implements IPlannerRepository
 		return false;
 	}
 
+	/**
+	 * Method that retrieves a contact by name 
+	 */
 	@Override
-	// 
 	public Contact getContactByName(String firstNameOfContact, String lastNameOfContact)
 	{
 		for (Contact contact : listOfContacts) 
 		{
-			if (contact.equals(firstNameOfContact)
-				&& contact.equals(lastNameOfContact)) 
+			if (contact.getFirstName().equals(firstNameOfContact)
+				&& contact.getLastName().equals(lastNameOfContact)) 
 			{
 				return contact;
 			}
@@ -66,7 +84,9 @@ public class TestPlannerRepository implements IPlannerRepository
 		throw new IllegalArgumentException("Contact is not found");
 	}
 
-	// retrieve a list of emails within the past 30 days 
+	/**
+	 * Method that retrieves a list of emails within the past 30 days 
+	 */	
 	@Override
 	public List<Email> getRecentEmails(LocalDateTime emailAfterThisDate)
 	{
@@ -85,8 +105,9 @@ public class TestPlannerRepository implements IPlannerRepository
 		
 	}
 
-	// check if the string we are looking for is in the email
-	//"hello"
+	/**
+	 * Method that retrieves a list of emails with the specified search string
+	 */
 	@Override
 	public List<Email> getMatchingEmails(String emailStringToSearch)
 	{
