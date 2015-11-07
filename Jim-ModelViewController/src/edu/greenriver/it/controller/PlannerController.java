@@ -88,10 +88,7 @@ public class PlannerController
 						}
 						else
 						{
-							for (Email email: emailMatch)
-							{
-								view.showSingleEmail(email);
-							}
+							view.ShowEmails(emailMatch);
 						}
 						
 					}
